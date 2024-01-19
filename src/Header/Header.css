@@ -3,17 +3,22 @@ h1{
 }
 
 .Header{
-  
-  position: sticky;
+    width: 100%;
+  position: fixed;
   height:60px;
   display:flex;
   align-items: center; 
-  background-color : #131921;
+  background-color: rgba(19, 25, 33, 0.1  ); /* Adjust the alpha value (0.7) for transparency */
+  color: black;
   top: 0;
   z-index:100;
-
+  transition: background-color 0.6s ease;
 }
 
+.Header.scrolled {
+  background-color: #fff; /* Change this to your desired opaque background color */
+  box-shadow: 0 4px 2px -2px gray; /* Optional: Add a box shadow for a subtle effect */
+}
 
 .header_logo{
   width:100px;
@@ -22,32 +27,58 @@ h1{
   margin-top:18px; 
 } 
 
-.header_searchIcon{
-  padding:5px;
-  height: 22px;
-  background-color: #cd9042;
-}
 
-.header_search{
-  display:flex;
-  flex:1;
+.header_wishlist {
+  display: flex;
+ 
+  flex-direction: column;
   align-items: center;
-  border-radius: 24px;
+  margin-left: 20px; /* Adjust margin as needed */
+  color: black;
+  text-decoration: none;
 }
 
-.header_searchInput{
-  width:100%;
-  padding:10px;
-  border:none;
-  height:12px;
+.header_wishlistIcon {
+  font-size: 30px; /* Adjust size as needed */
+  margin-right: 5px; /* Adjust margin as needed */
+  color: black;
+  text-decoration: none;
 }
 
+.header_wishlistLabel {
+  font-size: 12px; /* Adjust size as needed */
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+.header_search {
+  width: 60%
+}
+
+.header_searchContainer {
+  display: flex;
+
+  align-items: center;
+  background-color: white;
+  border: 1px solid black; /* Add border styling */
+  border-radius: 20px; /* Add border-radius */
+  padding: 5px; /* Add padding as needed */
+}
+
+.header_searchInput {
+  border: none;
+  outline-width: 0;
+  padding: 5px;
+  flex: 1; /* Allow the input to grow and take available space */
+}
 .header_option{
   color:white;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
+  align-items: center;
 }
 
 .header_nav{
@@ -56,21 +87,30 @@ h1{
 }
 
 .header_optionLineOne{
-  font-size: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: black; 
 }
 
 .header_optionLineTwo{
   font-size: 13px;
+  color: black;
   font-weight: 800;
 }
 
 .header_optionBasket{
   display: flex;
-  color:white;
+  color:black;
   align-items:center;
+  text-decoration: none;
 
 }
 
 .header_basketCount{
   margin:10px;
+  text-decoration: none;
 }
+.underline {
+  text-decoration: none;
+}
+

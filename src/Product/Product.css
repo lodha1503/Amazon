@@ -30,13 +30,14 @@
   border-color: #a88737 #9c7e31 #846a29;
   color:#111;
 }
-.product_info{
-  /* width: 100%; */
-  height:100px;
+.product_info {
+  margin: 0;
+  height: 80px; /* Set a specific height for product_info */
   margin-bottom: 15px;
   text-align: left;
 }
 
-.product_rating{
-  display:flex;
+.product_rating {
+  display: flex;
 }
+

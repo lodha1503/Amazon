@@ -1,78 +1,106 @@
 // Since Header is a component we need to capitalize the starting letter of the file
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import React from 'react'
-import './Header.css'
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import "./Header.css";
 import { Link } from "react-router-dom";
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from "../StateProvider";
+import React, { useEffect, useState } from "react";
 
 function Header() {
+    const [{ basket, user }, dispatch] = useStateValue();
+    const [isScrolled, setIsScrolled] = useState(false);
 
-  const [{basket}, dispatch] = useStateValue();
+    useEffect(() => {
+        // Add event listener for scroll
+        window.addEventListener("scroll", handleScroll);
 
-  //Dispatch is used to manipulate the info
-  
-  return (
+        // Cleanup the event listener on component unmount
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
+    const handleScroll = () => {
+        // Check the scroll position and update state
+        const scrollTop = window.scrollY;
+        if (scrollTop > 0) {
+            setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
+        }
+    };
 
-    <div>
-      
-        <div className='Header'>
-          
-          <Link to='/'>
-            <img className="header_logo" src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" 
-            />
-          </Link>
+    //Dispatch is used to manipulate the info
 
-          <div className='header_search'>
-            <input className="header_searchInput" classtype="text" />
-            <SearchIcon className="header_searchIcon"></SearchIcon>
-          </div>
+    return (
+        <div>
+            <div className={`Header ${isScrolled ? "scrolled" : ""}`}>
+            <div className="Header">
+                <Link to="/">
+                    <img
+                        className="header_logo"
+                        src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
+                    />
+                </Link>
 
-          <div className="header_nav">
+                <div className="header_search">
+                    <div className="header_searchContainer">
+                        <input
+                            className="header_searchInput"
+                            type="text"
+                            placeholder="Search..."
+                        />
+                        <SearchIcon className="header_searchIcon" />
+                    </div>
+                </div>
 
-            <div className='header_option'>
-              <span className='header_optionLineOne'>
-                Hello Guest
-              </span>
-              <span className='header_optionLineTwo'>
-                Sign In
-              </span>
+                <div className="header_nav" >
+                    <Link to="/login" className="auth underline">
+                        <div className="header_option">
+                            <span className="header_optionLineOne">
+                                {user ? "Hello Shreyansh  " : "Hello Guest"}
+                            </span>
+                            <span className="header_optionLineTwo">
+                                {user ? "Sign Out" : "Sign In"}
+                            </span>
+                        </div>
+                    </Link>
+
+                    {/* <div className="header_option">
+                        <span className="header_optionLineOne">Returns</span>
+                        <span className="header_optionLineTwo">& Orders</span>
+                    </div> */}
+
+                    <Link to="/checkout" className="underline">
+                        <div className="header_optionBasket">
+                            <div className="header_wishlist">
+                                <ShoppingBasketIcon></ShoppingBasketIcon>
+                                <span className="header_wishlistLabel">
+                                    Wish List
+                                </span>
+                            </div>
+                            <span className="header_optionLineTwo header_basketCount">
+                                {basket.length}
+                            </span>
+                        </div>
+                    </Link>
+
+                    {/* <Link to="/checkout">
+                        <div className="header_optionBasket">
+                            <ShoppingBasketIcon></ShoppingBasketIcon>
+                            <span className="header_optionLineTwo header_basketCount">
+                                {basket.length}
+                            </span>
+                            <span className="header_optionLineTwo header_basketCount">
+                                Wish List
+                            </span>
+                        </div>
+                    </Link> */}
+                </div>
             </div>
-
-            <div className='header_option'>
-              <span className='header_optionLineOne'>
-                Returns
-              </span>
-              <span className='header_optionLineTwo'>
-                & Orders
-              </span>  
             </div>
-
-            <div className='header_option'>
-              <span className='header_optionLineOne'>
-                Your
-              </span>
-              <span className='header_optionLineTwo'>
-                Prime
-              </span>
-            </div>
-
-            <Link to='/checkout'>
-              <div className="header_optionBasket">
-                <ShoppingBasketIcon></ShoppingBasketIcon>
-                <span className='header_optionLineTwo header_basketCount'>{basket.length}</span>
-              </div>
-            </Link>
-
-          </div>
-
-
-
         </div>
-      
-    </div>
-  )
+    );
 }
 
-export default Header
+export default Header;

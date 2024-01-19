@@ -3,10 +3,20 @@
   padding:20px;
   background-color: white;
   height: max-content;
+  margin-top: 60px;
 };
 .checkout_left{
   object-fit: contain;
 }
+
+.checkout_right {
+  flex: 0.3;
+  background-color: #fff; /* Optional: Set a background color */
+  padding: 20px;
+  border: 1px solid #ddd; /* Optional: Add a border for separation */
+  margin-left: auto; /* Push checkout_right to the right */
+}
+
 
 .checkout_ad{
   object-fit: contain;
